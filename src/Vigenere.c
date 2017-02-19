@@ -5,7 +5,7 @@
 #include "Vigenere.h"
 #define NUMERO_LETTERE 26 //Numero lettere dell'alfabeto
 
-typedef struct Lettera* link; //link Ë un tipo che rappresenta un puntatore a Lettera
+typedef struct Lettera* link; //link √® un tipo che rappresenta un puntatore a Lettera
 
 typedef struct Lettera {
 	char carattere; //Lettera (esempio 'a', 'b', ...)
@@ -38,8 +38,8 @@ void insertionSort_PeriodoValore(PeriodoValore* array, int l, int r);
 char* ReadToEnd(FILE* in);
 float pow_mia(float base, int esponente);
 
-link head = NULL;	//Puntatore alla testa della lista, che in pratica sar‡ la testa dell'alfabeto, cioË la lettera 'a'
-					//Ora lo impostiamo a NULL perchÈ non abbiamo ancora creato la lista
+link head = NULL;	//Puntatore alla testa della lista, che in pratica sar√† la testa dell'alfabeto, cio√® la lettera 'a'
+					//Ora lo impostiamo a NULL perch√© non abbiamo ancora creato la lista
 
 float* prob = NULL; //Array di dimensione NUMERO_LETTERE che contiene le frequenze delle lettere. Letto da file.
 
@@ -67,7 +67,7 @@ int Codifica(FILE* in, FILE* out, char* key)
 			c_out = codificaCarattere(tolower(c), tolower(key[i])); //Ricordiamoci di convertirla prima in minuscolo
 			//Seleziono la lettera successiva della key
 			i++;
-			if (i >= length) //Se la chiave Ë finita, torno al suo carattere iniziale
+			if (i >= length) //Se la chiave √® finita, torno al suo carattere iniziale
 				i = 0;
 		}
 		//Stampo la lettera codificata out sul file d'uscita
@@ -100,7 +100,7 @@ int Decodifica(FILE* in, FILE* out, char* key)
 			c_out = decodificaCarattere(tolower(c), tolower(key[i])); //Ricordiamoci di convertirla prima in minuscolo
 			//Seleziono la lettera successiva della key	
 			i++;	
-			if (i >= length) //Se la chiave Ë finita, torno al suo carattere iniziale
+			if (i >= length) //Se la chiave √® finita, torno al suo carattere iniziale
 				i = 0;
 		}
 		//Stampo la lettera decodificata out sul file d'uscita, maiuscola se era maiuscola, minuscola se era minuscola
@@ -114,19 +114,19 @@ void Attacco(FILE* in)
 {
 	char* stringa = ReadToEnd(in);
 	int min, max;
-	printf("Inserisci il periodo piu' piccolo che vuoi provare:\n");
+	printf("Insert the smallest period (length of keyword) you want to try:\n");
 	scanf("%d", &min);
-	printf("Inserisci il periodo piu' grande che vuoi provare:\n");
+	printf("Insert the largest period (length of keyword) you want to try:\n");
 	scanf("%d", &max);
 	PeriodoValore* periodi = trovaPeriodo(stringa, min, max);
-	printf("I periodi sono, in ordine dal piu' probabile:\n");
+	printf("Most likely periods (length of keyword) are, from the most likely:\n");
 	for (int i = 0; i < max - min + 1; i++)
 		printf("%d ", periodi[i].periodo);
-	printf("\nCon quale periodo vuoi provare a decifrare il testo?\n");
+	printf("\nWhich period do you want to use to try and decode the text?\n");
 	int periodo;
 	scanf("%d", &periodo);
 	LetteraValore** lettere = attaccaVigenere(stringa, periodo);
-	printf("Le dieci lettere piu' probabili per ogni posizione della chiave sono:\n");
+	printf("The ten most likely letters for each position of the keyword are:\n");
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < periodo; j++)
@@ -196,7 +196,7 @@ char decodificaCarattere(char in, char key)
 //doppiamente concatenata che rappresenta l'alfabeto di lettere minuscole.
 void inizializzaAlfabeto()
 {
-	if (head == NULL) //Inizializziamo la lista solo se non Ë stato ancora fatto
+	if (head == NULL) //Inizializziamo la lista solo se non √® stato ancora fatto
 	{
 		//Alloco la prima lettera, la 'a'
 		link a = (Lettera*)malloc(1 * sizeof(Lettera));
@@ -210,11 +210,11 @@ void inizializzaAlfabeto()
 			//Alloco una lettera e la inizializzo
 			Lettera* node = (Lettera*)malloc(1 * sizeof(Lettera)); //Creiamo spazio in memoria
 			node->carattere = 'a' + i; //Assegniamo il giusto carattere
-			node->prev = prev; //Il link al nodo precedente Ë in prev
-			prev->next = node; //Il nodo precedente ha ora un successore, cioË il nodo che abbiamo appena creato
-			node->next = NULL; //Per ora il successore di questo nodo non c'Ë
+			node->prev = prev; //Il link al nodo precedente √® in prev
+			prev->next = node; //Il nodo precedente ha ora un successore, cio√® il nodo che abbiamo appena creato
+			node->next = NULL; //Per ora il successore di questo nodo non c'√®
 		}
-		//Collego l'ultima lettera, la 'z', alla prima, la 'a', cosÏ da creare una lista circolare
+		//Collego l'ultima lettera, la 'z', alla prima, la 'a', cos√¨ da creare una lista circolare
 		prev->next = a;
 		a->prev = prev;
 		head = a;
@@ -224,17 +224,17 @@ void inizializzaAlfabeto()
 //Funzione che calcola l'indice di coincidenza di un testo contenuto in stringa
 float IC(char* stringa)
 {
-	int* occorrenze = (int*)malloc(NUMERO_LETTERE * sizeof(int)); //Vettore che conterr‡ il numero di occorrenze per ogni lettera
+	int* occorrenze = (int*)malloc(NUMERO_LETTERE * sizeof(int)); //Vettore che conterr√† il numero di occorrenze per ogni lettera
 	//Inizializzazione
 	for (int i = 0; i < NUMERO_LETTERE; i++)
 		occorrenze[i] = 0;
-	int lunghezza = 0; //Intero che conterr‡ il numero di lettere di stringa
+	int lunghezza = 0; //Intero che conterr√† il numero di lettere di stringa
 	for (int i = 0; i < strlen(stringa); i++)
 	{
 		char lettera = tolower(stringa[i]);
 		if (isalpha(lettera))
 		{
-			//Se il carattere corrente Ë una lettera, la conteggiamo
+			//Se il carattere corrente √® una lettera, la conteggiamo
 			occorrenze[lettera - 'a']++; lunghezza++;
 		}
 	}
@@ -247,17 +247,17 @@ float IC(char* stringa)
 }
 
 //Funzione che analizza i periodi da min e max (compresi) sul testo cifrato text.
-//Calcola i periodi pi˘ probabili usando l'indice di coincidenza.
-//Ritorna un array di PeriodoValore ordinato dal periodo pi˘ probabile, cioË quello con IC maggiore.
+//Calcola i periodi pi√π probabili usando l'indice di coincidenza.
+//Ritorna un array di PeriodoValore ordinato dal periodo pi√π probabile, cio√® quello con IC maggiore.
 PeriodoValore* trovaPeriodo(char* text, int min, int max)
 {
-	//Allochiamo l'array che conterr‡ l'IC medio per ogni periodo da min a max
+	//Allochiamo l'array che conterr√† l'IC medio per ogni periodo da min a max
 	PeriodoValore* ic_medio = (PeriodoValore*)malloc((max - min + 1)*sizeof(PeriodoValore));
 	//float* ic_medio = (float*)malloc((max - min + 1) * sizeof(float));
 	//Per ogni periodo calcolo l'IC medio
 	for (int i = min; i <= max; i++)
 	{
-		int j, k; //j Ë il contatore che va avanti in text, k conta solo le lettere alfabetiche
+		int j, k; //j √® il contatore che va avanti in text, k conta solo le lettere alfabetiche
 		//Alloco e inizializzo a vuote le i sequenze
 		char** sequenze = (char**)malloc(i  *sizeof(char*));
 		for (j = 0; j < i; j++)
@@ -304,17 +304,17 @@ void inizializzaProbabilita()
 //rispetto alle frequenze attese salvate nell'array globale prob
 float chiquadro(char* stringa)
 {
-	//Se non Ë gi‡ stato inizializzato, inizializzo l'array prob
+	//Se non √® gi√† stato inizializzato, inizializzo l'array prob
 	if (prob == NULL) inizializzaProbabilita();
 
-	int* occorrenze = (int*)calloc(NUMERO_LETTERE, sizeof(int)); //Vettore che conterr‡ il numero di occorrenze per ogni lettera
-	int lunghezza = 0; //Intero che conterr‡ il numero di lettere di stringa
+	int* occorrenze = (int*)calloc(NUMERO_LETTERE, sizeof(int)); //Vettore che conterr√† il numero di occorrenze per ogni lettera
+	int lunghezza = 0; //Intero che conterr√† il numero di lettere di stringa
 	for (int i = 0; i < strlen(stringa); i++)
 	{
 		char lettera = tolower(stringa[i]);
 		if (isalpha(lettera))
 		{
-			//Se il carattere corrente Ë una lettera, la conteggiamo
+			//Se il carattere corrente √® una lettera, la conteggiamo
 			occorrenze[lettera - 'a']++; lunghezza++;
 		}
 	}
@@ -328,13 +328,13 @@ float chiquadro(char* stringa)
 
 //Funzione che prova a decifrare un testo contenuto in stringa cifrata secondo Cesare.
 //Utilizza il test del chi-quadrato.
-//Ritorna un array di LetteraValore ordinato dalla lettera pi˘ probabile,
-//cioË quella col valore chi-quadro pi˘ piccolo.
+//Ritorna un array di LetteraValore ordinato dalla lettera pi√π probabile,
+//cio√® quella col valore chi-quadro pi√π piccolo.
 LetteraValore* attaccaCesare(char* stringa)
 {
-	//Allochiamo l'array che conterr‡ i risultati del test per ogni lettera e che restituiremo
+	//Allochiamo l'array che conterr√† i risultati del test per ogni lettera e che restituiremo
 	LetteraValore* valori = (LetteraValore*)malloc(NUMERO_LETTERE * sizeof(LetteraValore));
-	//Allochiamo una stringa temporanea che conterr‡ la possibile stringa decifrata
+	//Allochiamo una stringa temporanea che conterr√† la possibile stringa decifrata
 	char* temp = (char*)malloc(strlen(stringa) * sizeof(char));
 	//Per ogni possibile spostamento, calcoliamo il chi-quadro della sequenza
 	for (char i = 'a'; i <= 'z'; i++)
@@ -355,16 +355,16 @@ LetteraValore* attaccaCesare(char* stringa)
 }
 
 //Funzione che prova a decifrare testo, cifrato secondo Vigenere il cui periodo della
-//chiave Ë lunghezza_periodo. Restituisce un array di dimensione lunghezza_periodo, ogni elemento
-//del quale Ë un array di dimensione NUMERO_LETTERE di LetteraValore che contiene i risultati del
-//test chi-quadrato per ogni lettera del periodo, ordinati dalla lettera pi˘ probabile a quella meno.
+//chiave √® lunghezza_periodo. Restituisce un array di dimensione lunghezza_periodo, ogni elemento
+//del quale √® un array di dimensione NUMERO_LETTERE di LetteraValore che contiene i risultati del
+//test chi-quadrato per ogni lettera del periodo, ordinati dalla lettera pi√π probabile a quella meno.
 LetteraValore** attaccaVigenere(char* testo, int lunghezza_periodo)
 {
 	//Alloco l'array di array, che abbia tanti elementi quante lettere ci sono nella chiave
 	LetteraValore** risultato = (LetteraValore**)malloc(lunghezza_periodo * sizeof(LetteraValore*));
 
 	//Ora prendo una lettera per volta della chiave e la analizzo
-	int j, k; //j Ë il contatore che va avanti in testo, k conta solo le lettere alfabetiche
+	int j, k; //j √® il contatore che va avanti in testo, k conta solo le lettere alfabetiche
 	//Alloco e inizializzo a vuote le lunghezza_periodo sequenze
 	char** sequenze = (char**)malloc(lunghezza_periodo  *sizeof(char*));
 	for (j = 0; j < lunghezza_periodo; j++)
@@ -382,7 +382,7 @@ LetteraValore** attaccaVigenere(char* testo, int lunghezza_periodo)
 		}
 	}
 
-	//Ora analizzo ogni sequenza, che Ë cifrata secondo Cesare con una sola lettera
+	//Ora analizzo ogni sequenza, che √® cifrata secondo Cesare con una sola lettera
 	for (int i = 0; i < lunghezza_periodo; i++)
 	{
 		risultato[i] = attaccaCesare(sequenze[i]);
@@ -394,15 +394,15 @@ LetteraValore** attaccaVigenere(char* testo, int lunghezza_periodo)
 //Funzione che converte le lettere accentate in lettere non accentate.
 char convertiLetteraAccentata(char c)
 {
-	if (c == '‡')
+	if (c == '√†')
 		return 'a';
-	else if (c == 'Ë' || c == 'È')
+	else if (c == '√®' || c == '√©')
 		return 'e';
-	else if (c == 'Ï')
+	else if (c == '√¨')
 		return 'i';
-	else if (c == 'Ú')
+	else if (c == '√≤')
 		return 'o';
-	else if (c == '˘')
+	else if (c == '√π')
 		return 'u';
 	else
 		return c;
