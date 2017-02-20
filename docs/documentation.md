@@ -324,7 +324,7 @@ Returns a real value that is the index of coincidence of the input text.
 
 Given a text, the index of coincidence is:
 
-I.C.=∑i=Ai=Zfi(fi−1)N(N−1)
+![alt text](https://github.com/okh1/vigenere/blob/master/docs/ic.png)
 
 where fi is the number of occurrences of the letter at index _i_ in the input text, and N is the number of letters of the text.
 
