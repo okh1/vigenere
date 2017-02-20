@@ -1,3 +1,5 @@
+![alt text][logo]
+
 ## Function **Codifica(FILE*, FILE*, char*)**
 
 Encode a text file given a keyword.
