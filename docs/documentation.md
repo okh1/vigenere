@@ -1,5 +1,3 @@
-![alt text][logo]
-
 ## Function **Codifica(FILE*, FILE*, char*)**
 
 Encode a text file given a keyword.
@@ -356,7 +354,7 @@ Returns a real number that is the chi-squared test of the input text.
 
 The chi-squared test of a string is calculated with respect to the expected frequencies for a certain language saved in the global array prob, allocated with the function inizializzaProbabilia(). The used formula is the following:
 
-chiquadrato=∑i=Ai=Z(Ci−Ei)2Ei
+![alt text](https://github.com/okh1/vigenere/blob/master/docs/chiquadro.png)
 
 where Ci is the number of occurrences of the letter at index _i_ in the input text, while Ei is the number of expected occurrences of the letter at index _i_, that is the probability of the letter contained in the prob array times the number of letters in the text.
 
