@@ -136,7 +136,7 @@ This function loads the alphabet, that is used by other functions of the program
 
         for (int i = 0; i &lt; NUMERO\_LETTERE * 2; i++) {
 
-                printf("%c", head-&gt;carattere); head = head-&gt;next;
+                printf("%c", head->carattere); head = head->next;
 
         }
 
@@ -146,7 +146,7 @@ This function loads the alphabet, that is used by other functions of the program
 
         for (int i = 0; i &lt; NUMERO\_LETTERE * 2; i++) {
 
-                printf("%c", head-&gt;carattere); head = head-&gt;prev;
+                printf("%c", head->carattere); head = head->prev;
 
         }
 
@@ -293,7 +293,7 @@ Returns the same letter, without the stress.
 
 This function returns the input, but in this cases:
 
-| char* c | #### Return value |
+| char* c | Return value |
 | --- | --- |
 | à | a |
 | è | e |
