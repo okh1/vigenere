@@ -1,10 +1,10 @@
-## Function **Codifica(FILE\*, FILE\*, char\*)**
+## Function **Codifica(FILE*, FILE*, char*)**
 
 Encode a text file given a keyword.
 
 #### Syntax
 
-int Codifica(FILE\* in, FILE\* out, char\* key)
+int Codifica(FILE* in, FILE* out, char* key)
 
 #### Arguments
 
@@ -18,13 +18,13 @@ Returns 0 if successful, any other number if it encounters an error.
 
 #### Description
 
-This function represents the alphabet as a circular linked list (that is, the last letter, &#39;z&#39;, is linked to the first letter, &#39;a&#39;). This function implements the Vigenere cipher in this way: each character, if letter (stressed letters are converted to non stressed), is encoded following the corresponding letter in the keyword (if it is not a letter, it is copied untouched in the output). The encoding phase is delegated to the function codificaCarattere(char, char).
+This function represents the alphabet as a circular linked list (that is, the last letter, 'z', is linked to the first letter, 'a'). This function implements the Vigenere cipher in this way: each character, if letter (stressed letters are converted to non stressed), is encoded following the corresponding letter in the keyword (if it is not a letter, it is copied untouched in the output). The encoding phase is delegated to the function codificaCarattere(char, char).
 
 #### Example
 
-        char\* text2 = &quot;ATTACKATDAWN&quot;; char\* key2 = &quot;LEMON&quot;;
+        char* text2 = "ATTACKATDAWN"; char* key2 = "LEMON";
 
-        Codifica(fmemopen(text2, strlen(text2), &quot;r&quot;), stdout, key2); //LXFOPVEFRNHR
+        Codifica(fmemopen(text2, strlen(text2), "r"), stdout, key2); //LXFOPVEFRNHR
 
 ## Function **codificaCarattere(char, char)**
 
@@ -45,23 +45,23 @@ Encoded letter.
 
 #### Description
 
-This function accepts lower-case letters. It makes use of a circular linked list. First, it searches in the list for the letter _key_, starting from &#39;a&#39;, increasing a counter by 1 every letter read. In this way, we get the displacement _shift_ to add to the input letter _in_. At this point, we start again from the letter &#39;a&#39; in the circular linked list until we find the letter _in_. Then, we advance _shift_ times in the list. The resulting letter is the letter encoded according to the Caesar cipher.
+This function accepts lower-case letters. It makes use of a circular linked list. First, it searches in the list for the letter _key_, starting from 'a', increasing a counter by 1 every letter read. In this way, we get the displacement _shift_ to add to the input letter _in_. At this point, we start again from the letter 'a' in the circular linked list until we find the letter _in_. Then, we advance _shift_ times in the list. The resulting letter is the letter encoded according to the Caesar cipher.
 
 #### Example
 
-        char in = &#39;a&#39;; char key = &#39;b&#39;;
+        char in = 'a'; char key = 'b';
 
-        printf(&quot;%c\n&quot;, codificaCarattere(in, key)); //b
+        printf("%c\n", codificaCarattere(in, key)); //b
 
 
 
-## Function **Decodifica(FILE\*, FILE\*, char\*)**
+## Function **Decodifica(FILE*, FILE*, char*)**
 
 Decode a text file given a key.
 
 #### Syntax
 
-int Decodifica(FILE\* in, FILE\* out, char\* key)
+int Decodifica(FILE* in, FILE* out, char* key)
 
 #### Arguments
 
@@ -79,9 +79,9 @@ The text is analysed character  by character. If letter (also stressed), it is d
 
 #### Example
 
-        char\* text3 = &quot;MEGBSMXFUQHIUUEOS&quot;; char\* key3 = &quot;VERME&quot;;
+        char* text3 = "MEGBSMXFUQHIUUEOS"; char* key3 = "VERME";
 
-        Decodifica(fmemopen(text3, strlen(text3), &quot;r&quot;), stdout, key3); //RAPPORTOIMMEDIATO
+        Decodifica(fmemopen(text3, strlen(text3), "r"), stdout, key3); //RAPPORTOIMMEDIATO
 
 
 
@@ -112,7 +112,7 @@ Returns the decoded letter.
 
 #### Description
 
-This function accepts lower-case letters. It makes use of a circular linked list. First, it searched in the list for the letter _key_, starting from &#39;a&#39;, increasing a counter by 1 every letter read. In this way, we get the displacement _shift_ to subtract from the input letter _in_. At this point, we start again from the letter &#39;a&#39; in the circular linked list until we find the letter _in_. Then, we go back _shift_ times in the list. The resulting letter is the letter decoded according to the Caesar cipher.
+This function accepts lower-case letters. It makes use of a circular linked list. First, it searched in the list for the letter _key_, starting from 'a', increasing a counter by 1 every letter read. In this way, we get the displacement _shift_ to subtract from the input letter _in_. At this point, we start again from the letter 'a' in the circular linked list until we find the letter _in_. Then, we go back _shift_ times in the list. The resulting letter is the letter decoded according to the Caesar cipher.
 
 
 
@@ -126,39 +126,39 @@ void inizializzaAlfabeto()
 
 #### Description
 
-This function loads the alphabet, that is used by other functions of the program. We use the english alphabet of 26 letters (defined in the constant NUMERO\_LETTERE). The alphabet is represented as a circular linked list of structLettera; this structure consists of the character (the letter) and a link to the following letter. The last letter, &#39;z&#39;, is linked to the first one, &#39;a&#39;. This is a circular doubly linked list. The link to the list&#39;s head is a global variable. This function is executed once.
+This function loads the alphabet, that is used by other functions of the program. We use the english alphabet of 26 letters (defined in the constant NUMERO\_LETTERE). The alphabet is represented as a circular linked list of structLettera; this structure consists of the character (the letter) and a link to the following letter. The last letter, 'z', is linked to the first one, 'a'. This is a circular doubly linked list. The link to the list's head is a global variable. This function is executed once.
 
 #### Example
 
         inizializzaAlfabeto();
 
-        //Per controllare che sia corretto stampiamo l&#39;alfabeto due volte
+        //Per controllare che sia corretto stampiamo l'alfabeto due volte
 
-        for (int i = 0; i &lt; NUMERO\_LETTERE \* 2; i++) {
+        for (int i = 0; i &lt; NUMERO\_LETTERE * 2; i++) {
 
-                printf(&quot;%c&quot;, head-&gt;carattere); head = head-&gt;next;
+                printf("%c", head-&gt;carattere); head = head-&gt;next;
 
         }
 
-        printf(&quot;\n&quot;);
+        printf("\n");
 
         //Ora stampiamolo al contrario due volte per controllare i link ai nodi precedenti
 
-        for (int i = 0; i &lt; NUMERO\_LETTERE \* 2; i++) {
+        for (int i = 0; i &lt; NUMERO\_LETTERE * 2; i++) {
 
-                printf(&quot;%c&quot;, head-&gt;carattere); head = head-&gt;prev;
+                printf("%c", head-&gt;carattere); head = head-&gt;prev;
 
         }
 
-        printf(&quot;\n&quot;);
+        printf("\n");
 
-## Function **Attacco(FILE\*)**
+## Function **Attacco(FILE*)**
 
 Tries to decode a text file guessing the keyword.
 
 #### Syntax
 
-void Attacco(FILE\* in)
+void Attacco(FILE* in)
 
 #### Arguments
 
@@ -177,19 +177,19 @@ User intervention is needed twice. At the beginning, the user is asked to specif
 
 Suppose we have an input text file _in.txt_ in the same directory as the program.
 
-Now let&#39;s encode this with keyword _manzoni_: select the option #1.
+Now let's encode this with keyword _manzoni_: select the option #1.
 
 
 Press Enter. We are asked the keyword we wish to encode the text with. Write _manzoni_.
 
 
-Press Enter. We are asked the input file&#39;s path. Write _in.txt_.
+Press Enter. We are asked the input file's path. Write _in.txt_.
 
 
 Press Enter. Now the decoded text is printed. Copy and paste it to a new text file named _out.txt_.
 
 
-Now we want to test the Attacco() function: we will pretend not to know the keyword that encodes this text. Start the program again and select option #3. We are asked the input file&#39;s path. Write _out.txt_.
+Now we want to test the Attacco() function: we will pretend not to know the keyword that encodes this text. Start the program again and select option #3. We are asked the input file's path. Write _out.txt_.
 
 
 Press Enter. We are asked the smallest period we want to try. Remember that the Attacco() function tries all period between a minimum and a maximum and selects the most likely. For istance, write 1.
@@ -273,13 +273,13 @@ This functions reads from a file the relative frequencies of every alphabet lett
 
 0.0049
 
-## Function **convertiLetteraAccentata(char\*)**
+## Function **convertiLetteraAccentata(char*)**
 
 Converts a stressed letter to a non stressed letter.
 
 #### Syntax
 
-char convertiLetteraAccentata(char\* c)
+char convertiLetteraAccentata(char* c)
 
 #### Arguments
 
@@ -293,7 +293,7 @@ Returns the same letter, without the stress.
 
 This function returns the input, but in this cases:
 
-| char\* c | #### Return value |
+| char* c | #### Return value |
 | --- | --- |
 | à | a |
 | è | e |
@@ -304,13 +304,13 @@ This function returns the input, but in this cases:
 
 
 
-## Function **IC(char\*)**
+## Function **IC(char*)**
 
 Calculates the index of coincidence of a string.
 
 #### Syntax
 
-float IC(char\* stringa)
+float IC(char* stringa)
 
 #### Arguments
 
@@ -330,17 +330,17 @@ where fi is the number of occurrences of the letter at index _i_ in the input te
 
 #### Example
 
-        char\* text5 = &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot;;
+        char* text5 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
-        printf(&quot;L&#39;IC di questo testo e&#39;: %f\n&quot;, IC(text5)); //0.0650359
+        printf("L'IC di questo testo e': %f\n", IC(text5)); //0.0650359
 
-## Function **chiquadro(char\*)**
+## Function **chiquadro(char*)**
 
 Executes the chi-squared test on a string.
 
 #### Syntax
 
-float chiquadro(char\* stringa)
+float chiquadro(char* stringa)
 
 #### Arguments
 
@@ -360,19 +360,19 @@ where Ci is the number of occurrences of the letter at index _i_ in the input te
 
 #### Example
 
-        char\* text6 = &quot;The frequency of letters in text has been studied for use in cryptanalysis, and frequency analysis in particular.&quot;;
+        char* text6 = "The frequency of letters in text has been studied for use in cryptanalysis, and frequency analysis in particular.";
 
-        printf(&quot;Il chi-quadrato di questo testo e&#39;: %f\n&quot;, chiquadro(text6)); //73.05 in inglese
+        printf("Il chi-quadrato di questo testo e': %f\n", chiquadro(text6)); //73.05 in inglese
 
 
 
-## Function **trovaPeriodo(char\*, int, int)**
+## Function **trovaPeriodo(char*, int, int)**
 
 Estimates the probability that a text is encoded with a keyword of certain periods.
 
 #### Syntax
 
-PeriodoValore\* trovaPeriodo(char\* text, int min, int max)
+PeriodoValore* trovaPeriodo(char* text, int min, int max)
 
 #### Arguments
 
@@ -390,17 +390,17 @@ This function calculates the probability that the text has a keyword of a certai
 
 #### Example
 
-        char\* text8 = &quot;ETGU RLXRGA JGM, OMTGECGX ANU JCCM XB TFKT HR N FZNAHQNVZA BBWFKFL. XM ANU YCGX XUCK FT UIPCDC PVUHCZLIXH JKKF IAI JTZRXGKF QW YAUIEVZ, RGBXUGDGJL EAF GMGME, NPU FXL MAVVPTLX VP TPNIXBIIYEAC JCJ GVGMGGU. DDK QNPP WTTVF, EIWEMSTTRNWR ANU EMIAMAI DMGX XUCE Y IHSY VYYI AIYRVB WBQ UKJ BXIPBORRXV ABTB, ZJM EG VYC PZI BH KFXKXL PZLT, OMTGECGX HREZBTW XUCK FT AEQ CDYHLIQ GEMJZL ZQECN MS OG RZAX XB CSYCWSA JZQ RTVRGI YCW GBPTCCMVNVV MC T PVHV MU LXHFP. GI PEF QEJN MLRP KFPM LR DVEPG VRUVYGVL VPKM P GIJ EZNWXV.&quot;;
+        char* text8 = "ETGU RLXRGA JGM, OMTGECGX ANU JCCM XB TFKT HR N FZNAHQNVZA BBWFKFL. XM ANU YCGX XUCK FT UIPCDC PVUHCZLIXH JKKF IAI JTZRXGKF QW YAUIEVZ, RGBXUGDGJL EAF GMGME, NPU FXL MAVVPTLX VP TPNIXBIIYEAC JCJ GVGMGGU. DDK QNPP WTTVF, EIWEMSTTRNWR ANU EMIAMAI DMGX XUCE Y IHSY VYYI AIYRVB WBQ UKJ BXIPBORRXV ABTB, ZJM EG VYC PZI BH KFXKXL PZLT, OMTGECGX HREZBTW XUCK FT AEQ CDYHLIQ GEMJZL ZQECN MS OG RZAX XB CSYCWSA JZQ RTVRGI YCW GBPTCCMVNVV MC T PVHV MU LXHFP. GI PEF QEJN MLRP KFPM LR DVEPG VRUVYGVL VPKM P GIJ EZNWXV.";
 
-        printf(&quot;Il periodo potrebbe essere %d\n&quot;, trovaPeriodo(text8, 1, 15, 0)[0].periodo); //7
+        printf("Il periodo potrebbe essere %d\n", trovaPeriodo(text8, 1, 15, 0)[0].periodo); //7
 
-## Function **attaccaCesare(char\*)**
+## Function **attaccaCesare(char*)**
 
 Attempts to decode a text encoded using the Caesar cipher.
 
 #### Syntax
 
-LetteraValore\* attaccaCesare(char\* stringa)
+LetteraValore* attaccaCesare(char* stringa)
 
 #### Arguments
 
@@ -416,21 +416,21 @@ This function attempts to decrypt a string encoded according to the Caesar ciphe
 
 #### Example
 
-        char\* text7 = &quot;VURZJUGRGGUGVGJQKEOAGUGKKQVWQP&quot;;
+        char* text7 = "VURZJUGRGGUGVGJQKEOAGUGKKQVWQP";
 
-        LetteraValore\* val1 = attaccaCesare(text7, 0);
+        LetteraValore* val1 = attaccaCesare(text7, 0);
 
-        printf(&quot;La chiave secondo Cesare di questo testo piu probabile e&#39;: %c\n&quot;, val1[0].carattere); //C
+        printf("La chiave secondo Cesare di questo testo piu probabile e': %c\n", val1[0].carattere); //C
 
 
 
-## Function **attaccaVigenere(char\*, int)**
+## Function **attaccaVigenere(char*, int)**
 
 Attempts to decode a text encoded using the Vigenere cipher, given the length of the keyword.
 
 #### Syntax
 
-LetteraValore\*\* attaccaVigenere(char\* testo, int lunghezza\_periodo)
+LetteraValore** attaccaVigenere(char* testo, int lunghezza\_periodo)
 
 #### Arguments
 
@@ -447,21 +447,21 @@ This function determines the most likely keywords of the given length for the in
 
 #### Example
 
-        char\* text8 = &quot;ETGU RLXRGA JGM, OMTGECGX ANU JCCM XB TFKT HR N FZNAHQNVZA BBWFKFL. XM ANU YCGX XUCK FT UIPCDC PVUHCZLIXH JKKF IAI JTZRXGKF QW YAUIEVZ, RGBXUGDGJL EAF GMGME, NPU FXL MAVVPTLX VP TPNIXBIIYEAC JCJ GVGMGGU. DDK QNPP WTTVF, EIWEMSTTRNWR ANU EMIAMAI DMGX XUCE Y IHSY VYYI AIYRVB WBQ UKJ BXIPBORRXV ABTB, ZJM EG VYC PZI BH KFXKXL PZLT, OMTGECGX HREZBTW XUCK FT AEQ CDYHLIQ GEMJZL ZQECN MS OG RZAX XB CSYCWSA JZQ RTVRGI YCW GBPTCCMVNVV MC T PVHV MU LXHFP. GI PEF QEJN MLRP KFPM LR DVEPG VRUVYGVL VPKM P GIJ EZNWXV.&quot;;
+        char* text8 = "ETGU RLXRGA JGM, OMTGECGX ANU JCCM XB TFKT HR N FZNAHQNVZA BBWFKFL. XM ANU YCGX XUCK FT UIPCDC PVUHCZLIXH JKKF IAI JTZRXGKF QW YAUIEVZ, RGBXUGDGJL EAF GMGME, NPU FXL MAVVPTLX VP TPNIXBIIYEAC JCJ GVGMGGU. DDK QNPP WTTVF, EIWEMSTTRNWR ANU EMIAMAI DMGX XUCE Y IHSY VYYI AIYRVB WBQ UKJ BXIPBORRXV ABTB, ZJM EG VYC PZI BH KFXKXL PZLT, OMTGECGX HREZBTW XUCK FT AEQ CDYHLIQ GEMJZL ZQECN MS OG RZAX XB CSYCWSA JZQ RTVRGI YCW GBPTCCMVNVV MC T PVHV MU LXHFP. GI PEF QEJN MLRP KFPM LR DVEPG VRUVYGVL VPKM P GIJ EZNWXV.";
 
-        LetteraValore\*\* val = attaccaVigenere(text8, 7); //encrypt
+        LetteraValore** val = attaccaVigenere(text8, 7); //encrypt
 
-        printf(&quot;La chiave piu&#39; probabile e&#39; %c%c%c%c%c%c%c\n&quot;, val[0][0].carattere, val[1][0].carattere, val[2][0].carattere, val[3][0].carattere, val[4][0].carattere, val[5][0].carattere, val[6][0].carattere);
+        printf("La chiave piu' probabile e' %c%c%c%c%c%c%c\n", val[0][0].carattere, val[1][0].carattere, val[2][0].carattere, val[3][0].carattere, val[4][0].carattere, val[5][0].carattere, val[6][0].carattere);
 
 
 
-## Function **insertionSort\_LetteraValore(LetteraValore\*, int, int)**
+## Function **insertionSort\_LetteraValore(LetteraValore*, int, int)**
 
 Sorts an array of LetteraValore.
 
 #### Syntax
 
-void insertionSort\_LetteraValore(LetteraValore\* array, int l, int r)
+void insertionSort\_LetteraValore(LetteraValore* array, int l, int r)
 
 #### Arguments
 
@@ -473,13 +473,13 @@ _r_: right-most index.
 
 The array is sorted by the key _valore_ using Insertion Sort.
 
-## Function **insertionSort\_PeriodoValore(PeriodoValore\*, int, int)**
+## Function **insertionSort\_PeriodoValore(PeriodoValore*, int, int)**
 
 Sorts an array PeriodoValore.
 
 #### Syntax
 
-void insertionSort\_PeriodoValore(PeriodoValore\* array, int l, int r)
+void insertionSort\_PeriodoValore(PeriodoValore* array, int l, int r)
 
 #### Arguments
 
@@ -493,13 +493,13 @@ The array is sorted by the key _valore_ using Insertion Sort.
 
 
 
-## Function **ReadToEnd(FILE\*)**
+## Function **ReadToEnd(FILE*)**
 
 Reads a plaintext file into a string.
 
 #### Syntax
 
-char\* ReadToEnd(FILE\* in)
+char* ReadToEnd(FILE* in)
 
 #### Arguments
 
@@ -524,4 +524,4 @@ _esponente_: exponent.
 
 #### Return value
 
-Returns baseesponente.
+Returns base^sponente.
